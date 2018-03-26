@@ -20,7 +20,7 @@ public class ArticleEditor extends AppCompatActivity {
         mEditor = (RichEditor) findViewById(R.id.editor);
         mEditor.setEditorHeight(200);
         mEditor.setEditorFontSize(22);
-        mEditor.setEditorFontColor(Color.RED);
+        mEditor.setEditorFontColor(Color.BLACK);
         //mEditor.setEditorBackgroundColor(Color.BLUE);
         //mEditor.setBackgroundColor(Color.BLUE);
         //mEditor.setBackgroundResource(R.drawable.bg);
@@ -60,7 +60,7 @@ public class ArticleEditor extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.action_subscript).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.action_subscript).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.setSubscript();
             }
@@ -70,7 +70,7 @@ public class ArticleEditor extends AppCompatActivity {
             @Override public void onClick(View v) {
                 mEditor.setSuperscript();
             }
-        });
+        });*/
 
         findViewById(R.id.action_strikethrough).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -84,7 +84,7 @@ public class ArticleEditor extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.action_heading1).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.action_heading1).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.setHeading(1);
             }
@@ -118,27 +118,71 @@ public class ArticleEditor extends AppCompatActivity {
             @Override public void onClick(View v) {
                 mEditor.setHeading(6);
             }
-        });
+        });*/
 
-        findViewById(R.id.action_txt_color).setOnClickListener(new View.OnClickListener() {
-            private boolean isChanged;
+        findViewById(R.id.action_txt_color_black).setOnClickListener(new View.OnClickListener() {
+            //private boolean isChanged;
 
             @Override public void onClick(View v) {
-                mEditor.setTextColor(isChanged ? Color.BLACK : Color.RED);
-                isChanged = !isChanged;
+                mEditor.setTextColor(Color.parseColor("#000000"));
+                //isChanged = !isChanged;
             }
         });
 
-        findViewById(R.id.action_bg_color).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.action_txt_color_red).setOnClickListener(new View.OnClickListener() {
+            //private boolean isChanged;
+
+            @Override public void onClick(View v) {
+                mEditor.setTextColor(Color.parseColor("#ff0000"));
+                //isChanged = !isChanged;
+            }
+        });
+
+        findViewById(R.id.action_txt_color_yellow).setOnClickListener(new View.OnClickListener() {
+            //private boolean isChanged;
+
+            @Override public void onClick(View v) {
+                mEditor.setTextColor(Color.parseColor("#ffff00"));
+                //isChanged = !isChanged;
+            }
+        });
+
+        findViewById(R.id.action_txt_color_green).setOnClickListener(new View.OnClickListener() {
+            //private boolean isChanged;
+
+            @Override public void onClick(View v) {
+                mEditor.setTextColor(Color.parseColor("#00ff00"));
+                //isChanged = !isChanged;
+            }
+        });
+
+        findViewById(R.id.action_txt_color_blue).setOnClickListener(new View.OnClickListener() {
+            //private boolean isChanged;
+
+            @Override public void onClick(View v) {
+                mEditor.setTextColor(Color.parseColor("#0000ff"));
+                //isChanged = !isChanged;
+            }
+        });
+
+        findViewById(R.id.action_txt_color_cyan).setOnClickListener(new View.OnClickListener() {
+            //private boolean isChanged;
+
+            @Override public void onClick(View v) {
+                mEditor.setTextColor(Color.parseColor("#00ffff"));
+                //isChanged = !isChanged;
+            }
+        });
+        /*findViewById(R.id.action_bg_color).setOnClickListener(new View.OnClickListener() {
             private boolean isChanged;
 
             @Override public void onClick(View v) {
                 mEditor.setTextBackgroundColor(isChanged ? Color.TRANSPARENT : Color.YELLOW);
                 isChanged = !isChanged;
             }
-        });
+        });*/
 
-        findViewById(R.id.action_indent).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.action_indent).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.setIndent();
             }
@@ -184,7 +228,7 @@ public class ArticleEditor extends AppCompatActivity {
             @Override public void onClick(View v) {
                 mEditor.setNumbers();
             }
-        });
+        });*/
 
         findViewById(R.id.action_insert_image).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -193,11 +237,11 @@ public class ArticleEditor extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.action_insert_link).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.action_insert_link).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.insertLink("https://github.com/wasabeef", "wasabeef");
             }
-        });
+        });*/
         findViewById(R.id.action_insert_checkbox).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.insertTodo();
