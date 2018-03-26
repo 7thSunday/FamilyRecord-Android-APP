@@ -34,16 +34,16 @@ public class Idle extends AppCompatActivity {
         reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //reloadLogin();
+                reloadLogin();
             }
         });
     }
 
     //刷新
-    /*private void reloadLogin() {
+    private void reloadLogin() {
         Intent intent = new Intent(Idle.this,ArticleEditor.class);
         startActivity(intent);
-    }*/
+    }
 
     //创建家庭组
     private void createFamilyGroup() {
