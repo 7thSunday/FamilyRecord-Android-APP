@@ -36,7 +36,7 @@ public class ArticleEditor extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.action_undo).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.action_undo).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.undo();
             }
@@ -46,7 +46,7 @@ public class ArticleEditor extends AppCompatActivity {
             @Override public void onClick(View v) {
                 mEditor.redo();
             }
-        });
+        });*/
 
         findViewById(R.id.action_bold).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {

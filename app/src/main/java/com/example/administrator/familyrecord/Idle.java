@@ -1,6 +1,7 @@
 package com.example.administrator.familyrecord;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,10 +18,18 @@ public class Idle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.idle_page);
 
+        SharedPreferences sp=getSharedPreferences("login",MODE_PRIVATE);
+        boolean isinFG = sp.getBoolean("inFG",false);
+
 
         //获取控件
         final Button createFG = (Button) findViewById(R.id.create_fg);
         ImageButton reload = (ImageButton) findViewById(R.id.reload);
+
+        if (!isinFG){
+            createFG.setEnabled(false);
+            createFG.setBackgroundColor(Color.parseColor("#8a8a8a"));
+        }
 
         //绑定点击事件
         createFG.setOnClickListener(new View.OnClickListener() {
