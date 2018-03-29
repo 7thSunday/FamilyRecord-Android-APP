@@ -42,8 +42,6 @@ public class HttpUtils {
             conn.connect();
             String data = JsonToHttpString(user);
 
-
-            System.out.println(data);
             //获取输出流
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
             /*out.write(data.getBytes());*/
@@ -68,6 +66,7 @@ public class HttpUtils {
                 message.close();
                 // 返回字符串
                 msg = new String(message.toByteArray());
+                System.out.println(msg);
                 JSONObject result = new JSONObject(msg);
                 return result.getBoolean("success");
             }

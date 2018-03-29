@@ -26,7 +26,7 @@ public class Idle extends AppCompatActivity {
         final Button createFG = (Button) findViewById(R.id.create_fg);
         ImageButton reload = (ImageButton) findViewById(R.id.reload);
 
-        if (!isinFG){
+        if (isinFG){
             createFG.setEnabled(false);
             createFG.setBackgroundColor(Color.parseColor("#8a8a8a"));
         }

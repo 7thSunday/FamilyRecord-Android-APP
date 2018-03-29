@@ -83,9 +83,9 @@ public class Login extends AppCompatActivity {
                     editor.putString("username",username);
                     editor.putString("password",password);
                     editor.commit();
-
                     Intent intent = new Intent(Login.this,Idle.class);
                     startActivity(intent);
+                    finish();
 
                 }else {
                     Toast.makeText(Login.this, "登录失败", Toast.LENGTH_SHORT).show();

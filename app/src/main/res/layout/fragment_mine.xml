@@ -40,6 +40,8 @@
                         android:layout_height="35dp"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
+                        android:textSize="12dp"
+                        android:textAlignment="center"
                         android:text="修改资料" />
 
                     <Button
@@ -48,6 +50,8 @@
                         android:layout_height="35dp"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
+                        android:textSize="12dp"
+                        android:textAlignment="center"
                         android:text="注销" />
                 </LinearLayout>
 
