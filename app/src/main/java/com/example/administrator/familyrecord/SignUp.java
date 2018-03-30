@@ -62,10 +62,15 @@ public class SignUp extends AppCompatActivity {
             public void run(){
                 super.run();
                 Looper.prepare();
-
+                boolean isSuccess = false;
                 String url = "http://10.77.115.148:8080/FamilyRecord/login/register.do";
                 HttpUtils hu = new HttpUtils();
-                if (hu.sign(user,url)) {
+                try {
+                    isSuccess =  hu.sign(user,url,1).getBoolean("success");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (isSuccess) {
 
                     Toast.makeText(SignUp.this, "注册成功", Toast.LENGTH_SHORT).show();
                     finish();

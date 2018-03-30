@@ -1,5 +1,6 @@
 package com.example.administrator.familyrecord.utils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,9 +21,11 @@ import java.util.Map;
 
 public class HttpUtils {
 
-    public static  boolean sign(JSONObject user,String url)
+    public static  JSONObject sign(JSONObject user,String url, int type)
     {
         String msg = "";
+        JSONObject result = new JSONObject();
+        JSONObject receivedata = new JSONObject();
         try{
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             //设置请求方式,请求超时信息
@@ -40,12 +43,12 @@ public class HttpUtils {
             // 设置接收类型
             conn.setRequestProperty("accept","application/json");
             conn.connect();
-            String data = JsonToHttpString(user);
+            String outputdata = JsonToHttpString(user);
 
             //获取输出流
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
             /*out.write(data.getBytes());*/
-            out.writeBytes(data);
+            out.writeBytes(outputdata);
             out.flush();
             if (conn.getResponseCode() == 200) {
                 // 获取响应的输入流对象
@@ -66,12 +69,27 @@ public class HttpUtils {
                 message.close();
                 // 返回字符串
                 msg = new String(message.toByteArray());
-                System.out.println(msg);
-                JSONObject result = new JSONObject(msg);
-                return result.getBoolean("success");
+
+
+                if (type==0){
+                    //将字符串处理为Json对象
+                    receivedata = new JSONObject(msg);
+
+                    JSONArray arr = null;
+                    arr = new JSONArray(receivedata.getString("data"));//提取数据部分
+                    for (int i = 0; i < arr.length(); i++) {
+                        result = (JSONObject) arr.get(i);
+                    }
+                }
+
+                if (type==1){
+                    result = new JSONObject(msg);
+                }
+
+
             }
         }catch(Exception e){e.printStackTrace();}
-        return false;
+        return result;//返回的Json对象
     }
 
     public static String JsonToHttpString(JSONObject json){
@@ -86,6 +104,16 @@ public class HttpUtils {
             }
         }
         return str.equals("")?"":str.substring(0,str.length()-1);
+    }
+
+    public static  String DataToJsonString(String str){
+        String ok = "";
+        for (int i=0;i<str.length();i++){
+            if (str.charAt(i)!='['&&str.charAt(i)!=']') {
+                ok+= str.charAt(i);
+            }
+        }
+        return ok;
     }
 
 }

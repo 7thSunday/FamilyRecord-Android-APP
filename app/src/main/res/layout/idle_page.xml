@@ -52,19 +52,35 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
 
-        <ImageButton
-            android:id="@+id/reload"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/reload" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="刷新"
-            android:textAlignment="center" />
+            <Button
+                android:id="@+id/reload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:background="#ff99cc"
+                android:textColor="#ffffff"
+                android:layout_weight="1"
+                android:text="刷新" />
+
+            <Button
+                android:id="@+id/signout_in_idle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:background="#ff99cc"
+                android:textColor="#ffffff"
+                android:layout_weight="1"
+                android:text="注销" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

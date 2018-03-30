@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class Idle extends AppCompatActivity {
 
@@ -18,15 +19,16 @@ public class Idle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.idle_page);
 
-        SharedPreferences sp=getSharedPreferences("login",MODE_PRIVATE);
-        boolean isinFG = sp.getBoolean("inFG",false);
+        final SharedPreferences sp=getSharedPreferences("login",MODE_PRIVATE);
+        String groupID = sp.getString("groupId","");
 
 
         //获取控件
         final Button createFG = (Button) findViewById(R.id.create_fg);
-        ImageButton reload = (ImageButton) findViewById(R.id.reload);
+        Button reload = (Button) findViewById(R.id.reload);
+        final Button signout = (Button) findViewById(R.id.signout_in_idle);
 
-        if (isinFG){
+        if (groupID.equals(null)){
             createFG.setEnabled(false);
             createFG.setBackgroundColor(Color.parseColor("#8a8a8a"));
         }
@@ -46,12 +48,30 @@ public class Idle extends AppCompatActivity {
                 reloadLogin();
             }
         });
+
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("username","");
+                editor.putString("password","");
+                editor.putString("groupId",null);
+                editor.commit();
+                Toast.makeText(Idle.this, "已注销，请重新登录", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Idle.this,Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
+
 
     //刷新
     private void reloadLogin() {
-        Intent intent = new Intent(Idle.this,ArticleEditor.class);
+        Intent intent = new Intent(Idle.this,Welcome.class);
         startActivity(intent);
+        finish();
     }
 
     //创建家庭组

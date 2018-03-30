@@ -22,19 +22,23 @@ public class Welcome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
 
-        SharedPreferences sp=getSharedPreferences("login",MODE_PRIVATE);
+        final SharedPreferences sp=getSharedPreferences("login",MODE_PRIVATE);
         final String usern = sp.getString("username","");
         final String psw = sp.getString("password","");
-        final boolean isinFG = sp.getBoolean("inFG",true);
 
         //登录判断
         new Thread(){
             public void run(){
                 super.run();
                 Looper.prepare();
+                String myuseraccount = null;
+                JSONObject user = new JSONObject();
+                String groupId = null;
+
 
                 Toast.makeText(Welcome.this, "初始化中...", Toast.LENGTH_LONG).show();
-                JSONObject user = new JSONObject();
+
+
                 try {
                     user.put("account",usern);
                     user.put("password",psw);
@@ -43,9 +47,17 @@ public class Welcome extends AppCompatActivity {
                 }
                 HttpUtils hu = new HttpUtils();
                 String url = "http://10.77.115.148:8080/FamilyRecord/login/loginin.do";
-                if (hu.sign(user,url)) {
+                try {
+                    JSONObject myuser = hu.sign(user,url,0);
+                    System.out.println(myuser);
+                    myuseraccount = myuser.getString("account");
+                    groupId = myuser.getString("groupId");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (myuseraccount!=null) {
 
-                    if (isinFG){
+                    if (!groupId.equals(null)){
                         handlerInFG.sendEmptyMessageDelayed(0,3000);
                     }else {
                         handlerNotInFG.sendEmptyMessageDelayed(0,3000);

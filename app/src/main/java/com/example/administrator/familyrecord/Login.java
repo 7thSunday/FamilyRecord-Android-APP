@@ -74,17 +74,31 @@ public class Login extends AppCompatActivity {
             public void run(){
                 super.run();
                 Looper.prepare();
-
+                String myuseraccount = null;
+                String groupID = null;
                 String url = "http://10.77.115.148:8080/FamilyRecord/login/loginin.do";
                 HttpUtils hu = new HttpUtils();
-                if (hu.sign(user,url)) {
+                try {
+                    JSONObject myuser = hu.sign(user,url,0);
+                    myuseraccount = myuser.getString("account");
+                    groupID = myuser.getString("groupId");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (myuseraccount!=null) {
                     //保存账户密码
                     SharedPreferences.Editor editor =sp.edit();
                     editor.putString("username",username);
                     editor.putString("password",password);
+                    editor.putString("groupId",groupID);
                     editor.commit();
-                    Intent intent = new Intent(Login.this,Idle.class);
-                    startActivity(intent);
+                    if (!groupID.equals("null")){
+                        Intent intent = new Intent(Login.this,HomePage.class);
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(Login.this,Idle.class);
+                        startActivity(intent);
+                    }
                     finish();
 
                 }else {
