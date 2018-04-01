@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 
+import com.example.administrator.familyrecord.utils.ConfigUtils;
 import com.example.administrator.familyrecord.utils.HttpUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 public class Welcome extends AppCompatActivity {
 
@@ -23,6 +25,7 @@ public class Welcome extends AppCompatActivity {
         setContentView(R.layout.welcome);
 
         final SharedPreferences sp=getSharedPreferences("login",MODE_PRIVATE);
+        final SharedPreferences.Editor editor =sp.edit();
         final String usern = sp.getString("username","");
         final String psw = sp.getString("password","");
 
@@ -46,7 +49,8 @@ public class Welcome extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 HttpUtils hu = new HttpUtils();
-                String url = "http://10.77.115.148:8080/FamilyRecord/login/loginin.do";
+                String loginUrl = ConfigUtils.getProperties(getApplicationContext(), "loginUrl");
+                String url = ConfigUtils.getProperties(getApplicationContext(),"host") + loginUrl;
                 try {
                     JSONObject myuser = hu.sign(user,url,0);
                     System.out.println(myuser);
@@ -58,6 +62,7 @@ public class Welcome extends AppCompatActivity {
                 if (myuseraccount!=null) {
 
                     if (!groupId.equals(null)){
+                        editor.putString("groupId",groupId);
                         handlerInFG.sendEmptyMessageDelayed(0,3000);
                     }else {
                         handlerNotInFG.sendEmptyMessageDelayed(0,3000);

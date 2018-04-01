@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.familyrecord.subHomePage.ArticleFragment;
+import com.example.administrator.familyrecord.subHomePage.MineFragment;
+import com.example.administrator.familyrecord.subHomePage.NewsFragment;
+import com.example.administrator.familyrecord.subHomePage.PhotoFragment;
+import com.example.administrator.familyrecord.subHomePage.VideoFragment;
+
 public class HomePage extends AppCompatActivity implements View.OnClickListener{
 
     private NewsFragment newsFragment;

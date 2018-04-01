@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.administrator.familyrecord.utils.ConfigUtils;
 import com.example.administrator.familyrecord.utils.HttpUtils;
 
 import org.json.JSONException;
@@ -76,7 +77,8 @@ public class Login extends AppCompatActivity {
                 Looper.prepare();
                 String myuseraccount = null;
                 String groupID = null;
-                String url = "http://10.77.115.148:8080/FamilyRecord/login/loginin.do";
+                String loginUrl = ConfigUtils.getProperties(getApplicationContext(), "loginUrl");
+                String url = ConfigUtils.getProperties(getApplicationContext(),"host") + loginUrl;
                 HttpUtils hu = new HttpUtils();
                 try {
                     JSONObject myuser = hu.sign(user,url,0);
@@ -104,8 +106,6 @@ public class Login extends AppCompatActivity {
                 }else {
                     Toast.makeText(Login.this, "登录失败", Toast.LENGTH_SHORT).show();
                 }
-
-
 
                 Looper.loop();
             }

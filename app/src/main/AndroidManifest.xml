@@ -30,7 +30,8 @@
             android:name=".ArticleEditor"
             android:label="@string/title_activity_article_editor"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity android:name=".album.ShowAlbum" />
+        <activity android:name=".album.ShowPhoto"></activity>
     </application>
 
 </manifest>
