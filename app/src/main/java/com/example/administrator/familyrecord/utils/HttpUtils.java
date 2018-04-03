@@ -100,6 +100,19 @@ public class HttpUtils {
         return result;//返回的Json对象
     }
 
+    public static JSONObject creatFG (String url , JSONObject fg){
+
+        String msg = "";
+        JSONObject result = new JSONObject();
+        try {
+            msg =  Connecter(url,JsonToHttpString(fg));
+            result = new JSONObject(msg);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static  JSONArray selectAlbum (String url, JSONObject user){
 
         JSONArray arr = null;
@@ -113,6 +126,44 @@ public class HttpUtils {
         }
 
         return arr;
+    }
+
+    public static JSONArray selectMember (String url, JSONObject family){
+        JSONArray arr = null;
+        try {
+            JSONObject receivedata = new JSONObject(Connecter(url,JsonToHttpString(family)));
+
+            arr = new JSONArray(receivedata.getString("data"));//提取数据部分
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return arr;
+    }
+
+    public static JSONObject addMember (String url,JSONObject newMember){
+        String msg = "";
+        JSONObject result = new JSONObject();
+        try {
+            msg =  Connecter(url,JsonToHttpString(newMember));
+            result = new JSONObject(msg);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static JSONObject deleteMember (String url,JSONObject delete){
+        String msg = "";
+        JSONObject result = new JSONObject();
+        try {
+            msg =  Connecter(url,JsonToHttpString(delete));
+            result = new JSONObject(msg);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public static void uploadImage (String url,String srcPath, JSONObject user){
@@ -262,7 +313,7 @@ public class HttpUtils {
 
 
 
-    public static  String DataToJsonString(String str){
+   /* public static  String DataToJsonString(String str){
         String ok = "";
         for (int i=0;i<str.length();i++){
             if (str.charAt(i)!='['&&str.charAt(i)!=']') {
@@ -270,6 +321,6 @@ public class HttpUtils {
             }
         }
         return ok;
-    }
+    }*/
 
 }

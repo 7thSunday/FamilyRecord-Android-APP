@@ -37,7 +37,9 @@ public class Welcome extends AppCompatActivity {
                 String myuseraccount = null;
                 JSONObject user = new JSONObject();
                 String groupId = null;
-
+                String groupName = null;
+                String creator = null;
+                String nickname = null;
 
                 Toast.makeText(Welcome.this, "初始化中...", Toast.LENGTH_LONG).show();
 
@@ -56,13 +58,18 @@ public class Welcome extends AppCompatActivity {
                     System.out.println(myuser);
                     myuseraccount = myuser.getString("account");
                     groupId = myuser.getString("groupId");
+                    nickname = myuser.getString("nickName");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 if (myuseraccount!=null) {
 
-                    if (!groupId.equals(null)){
+                    if (!groupId.equals("null")){
                         editor.putString("groupId",groupId);
+                        editor.putString("groupName",groupName);
+                        editor.putString("creator",creator);
+                        editor.putString("nickName",nickname);
+                        editor.commit();
                         handlerInFG.sendEmptyMessageDelayed(0,3000);
                     }else {
                         handlerNotInFG.sendEmptyMessageDelayed(0,3000);

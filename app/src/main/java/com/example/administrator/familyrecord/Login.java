@@ -41,11 +41,18 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String usern = username.getText().toString();
                 String psw = password.getText().toString();
-                try {
-                    loginBtnClick(usern,psw);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+
+                if (usern.length()>0&&psw.length()>0){
+                    try {
+                        loginBtnClick(usern,psw);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Toast.makeText(Login.this, "请输入账号和密码", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +84,9 @@ public class Login extends AppCompatActivity {
                 Looper.prepare();
                 String myuseraccount = null;
                 String groupID = null;
+                String groupName = null;
+                String creator = null;
+                String nickname = null;
                 String loginUrl = ConfigUtils.getProperties(getApplicationContext(), "loginUrl");
                 String url = ConfigUtils.getProperties(getApplicationContext(),"host") + loginUrl;
                 HttpUtils hu = new HttpUtils();
@@ -84,6 +94,9 @@ public class Login extends AppCompatActivity {
                     JSONObject myuser = hu.sign(user,url,0);
                     myuseraccount = myuser.getString("account");
                     groupID = myuser.getString("groupId");
+                    groupName = myuser.getString("groupName");
+                    creator = myuser.getString("creator");
+                    nickname= myuser.getString("nickName");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -93,6 +106,9 @@ public class Login extends AppCompatActivity {
                     editor.putString("username",username);
                     editor.putString("password",password);
                     editor.putString("groupId",groupID);
+                    editor.putString("groupName",groupName);
+                    editor.putString("nickName",nickname);
+                    editor.putString("creator",creator);
                     editor.commit();
                     if (!groupID.equals("null")){
                         Intent intent = new Intent(Login.this,HomePage.class);

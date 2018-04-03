@@ -72,6 +72,8 @@ public class RecyclerViewUtil {
     //长按事件接口
     public interface OnItemLongClickListener {
         public void onItemLongClick(int position, View view);
+
+        void OnItemLongClickListener(int position, View view);
     }
 
     //单击事件接口

@@ -6,12 +6,14 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.administrator.familyrecord.fgManage.FgManage;
 import com.example.administrator.familyrecord.Login;
 import com.example.administrator.familyrecord.R;
 
@@ -77,7 +79,21 @@ public class MineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mine, container, false);
+        // Inflate the layout for this fragment
+        return view;
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        init();;
+    }
+
+    private void init(){
         Button signout = (Button) view.findViewById(R.id.btn_signout);
+        Button manageFg = (Button) view.findViewById(R.id.btn_fgmanage);
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +102,10 @@ public class MineFragment extends Fragment {
                 SharedPreferences.Editor editor =sp.edit();
                 editor.putString("username","");
                 editor.putString("password","");
+                editor.putString("groupId","null");
+                editor.putString("groupName","null");
+                editor.putString("creator","null");
+                editor.putString("nickName","null");
                 editor.commit();
                 Toast.makeText(getActivity(), "已注销，请重新登录", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getActivity(),Login.class);
@@ -93,10 +113,14 @@ public class MineFragment extends Fragment {
                 getActivity().finish();
             }
         });
-        // Inflate the layout for this fragment
-        return view;
 
-
+        manageFg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),FgManage.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

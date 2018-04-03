@@ -31,7 +31,8 @@
             android:label="@string/title_activity_article_editor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".album.ShowAlbum" />
-        <activity android:name=".album.ShowPhoto"></activity>
+        <activity android:name=".album.ShowPhoto" />
+        <activity android:name=".fgManage.FgManage"></activity>
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.familyrecord.R;
+import com.example.administrator.familyrecord.Welcome;
 import com.example.administrator.familyrecord.subHomePage.PhotoFragment;
 import com.example.administrator.familyrecord.utils.ConfigUtils;
 import com.example.administrator.familyrecord.utils.GetPath;
@@ -113,17 +114,24 @@ public class ShowAlbum extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                new Thread(){
-                    public void run(){
+                if(srcPath==null){
+                    Toast.makeText(ShowAlbum.this, "请选择一张照片", Toast.LENGTH_SHORT).show();
+                }else {
+                    new Thread(){
+                        public void run(){
 
-                        HttpUtils hu = new HttpUtils();
-                        String uploadUrl = ConfigUtils.getProperties(getApplicationContext(), "uploadUrl");
-                        String url = ConfigUtils.getProperties(getApplicationContext(),"host") + uploadUrl;
+                            HttpUtils hu = new HttpUtils();
+                            String uploadUrl = ConfigUtils.getProperties(getApplicationContext(), "uploadUrl");
+                            String url = ConfigUtils.getProperties(getApplicationContext(),"host") + uploadUrl;
 
-                        hu.uploadImage(url,srcPath,user);
-                    }
+                            hu.uploadImage(url,srcPath,user);
 
-                }.start();
+                        }
+
+                    }.start();
+                }
+
+
 
 
 
@@ -140,6 +148,7 @@ public class ShowAlbum extends AppCompatActivity {
             Uri uri = data.getData();
             GetPath path = new GetPath();
             srcPath = path.getPath(getApplicationContext(),uri);
+
 
         }
     }

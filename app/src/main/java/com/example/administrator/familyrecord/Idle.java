@@ -28,7 +28,7 @@ public class Idle extends AppCompatActivity {
         Button reload = (Button) findViewById(R.id.reload);
         final Button signout = (Button) findViewById(R.id.signout_in_idle);
 
-        if (groupID.equals(null)){
+        if (!groupID.equals("null")){
             createFG.setEnabled(false);
             createFG.setBackgroundColor(Color.parseColor("#8a8a8a"));
         }
@@ -55,7 +55,10 @@ public class Idle extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("username","");
                 editor.putString("password","");
-                editor.putString("groupId",null);
+                editor.putString("groupId","null");
+                editor.putString("groupName","null");
+                editor.putString("creator","null");
+                editor.putString("nickName","null");
                 editor.commit();
                 Toast.makeText(Idle.this, "已注销，请重新登录", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Idle.this,Login.class);
