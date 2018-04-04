@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/FamilyRecord.iml" filepath="$PROJECT_DIR$/FamilyRecord.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/richeditor/richeditor.iml" filepath="$PROJECT_DIR$/richeditor/richeditor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vitamio/vitamio.iml" filepath="$PROJECT_DIR$/vitamio/vitamio.iml" />
     </modules>
   </component>
 </project>
