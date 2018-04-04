@@ -124,7 +124,7 @@ public class ShowAlbum extends AppCompatActivity {
                             String uploadUrl = ConfigUtils.getProperties(getApplicationContext(), "uploadUrl");
                             String url = ConfigUtils.getProperties(getApplicationContext(),"host") + uploadUrl;
 
-                            hu.upload(url,srcPath,user);
+                            hu.uploadImage(url,srcPath,user);
 
                         }
 

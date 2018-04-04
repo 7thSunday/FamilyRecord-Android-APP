@@ -7,20 +7,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.administrator.familyrecord.HomePage;
 import com.example.administrator.familyrecord.R;
-import com.example.administrator.familyrecord.album.CreateAlbum;
 import com.example.administrator.familyrecord.album.ShowAlbum;
 import com.example.administrator.familyrecord.utils.ConfigUtils;
 import com.example.administrator.familyrecord.utils.HttpUtils;
@@ -223,16 +219,8 @@ public class PhotoFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        FloatingActionButton createAlbum = (FloatingActionButton) getView().findViewById(R.id.btn_create_album);
-        createAlbum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),CreateAlbum.class);
-                startActivity(intent);
-            }
-        });
     }
+
 
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.myViewHolder>{
@@ -243,12 +231,15 @@ public class PhotoFragment extends Fragment {
             this.data = list;
         }
 
+
+
         @Override
         public myViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             myViewHolder holder=new myViewHolder(View.inflate(viewGroup.getContext(), R.layout.album_item, null));
             return holder;
         }
         //绑定数据
+
 
         @Override
         public void  onBindViewHolder(myViewHolder holder, int i) {
@@ -258,6 +249,8 @@ public class PhotoFragment extends Fragment {
             url += list.get(i).get("albumCover")==null? "":list.get(i).get("albumCover").toString();
             holder.albumName.setText(list.get(i).get("albumName").toString());
             holder.albumCover.setImageUrl(url);
+
+
         }
         @Override
         public int getItemCount() {
