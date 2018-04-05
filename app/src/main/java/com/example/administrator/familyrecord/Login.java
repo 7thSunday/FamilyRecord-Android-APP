@@ -87,6 +87,7 @@ public class Login extends AppCompatActivity {
                 String groupName = null;
                 String creator = null;
                 String nickname = null;
+                String headImageUrl = null;
                 String loginUrl = ConfigUtils.getProperties(getApplicationContext(), "loginUrl");
                 String url = ConfigUtils.getProperties(getApplicationContext(),"host") + loginUrl;
                 HttpUtils hu = new HttpUtils();
@@ -96,6 +97,7 @@ public class Login extends AppCompatActivity {
                     groupID = myuser.getString("groupId");
                     groupName = myuser.getString("groupName");
                     creator = myuser.getString("creator");
+                    headImageUrl = myuser.getString("headImageUrl");
                     nickname= myuser.getString("nickName");
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -108,6 +110,7 @@ public class Login extends AppCompatActivity {
                     editor.putString("groupId",groupID);
                     editor.putString("groupName",groupName);
                     editor.putString("nickName",nickname);
+                    editor.putString("headImageUrl",headImageUrl);
                     editor.putString("creator",creator);
                     editor.commit();
                     if (!groupID.equals("null")){

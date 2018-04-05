@@ -11,11 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.administrator.familyrecord.fgManage.FgManage;
+import com.example.administrator.familyrecord.myConfig.AccountConfig;
+import com.example.administrator.familyrecord.myConfig.FgManage;
 import com.example.administrator.familyrecord.Login;
 import com.example.administrator.familyrecord.R;
+import com.example.administrator.familyrecord.utils.ConfigUtils;
+import com.loopj.android.image.SmartImageView;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -87,13 +91,44 @@ public class MineFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        init();;
+        init();
+        Button reload = (Button) getView().findViewById(R.id.btn_reload_mine);
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                init();
+            }
+        });
     }
 
     private void init(){
         Button signout = (Button) view.findViewById(R.id.btn_signout);
         Button manageFg = (Button) view.findViewById(R.id.btn_fgmanage);
+        Button myConfig = (Button) view.findViewById(R.id.btn_accountconfig);
+        SmartImageView myhead = (SmartImageView) view.findViewById(R.id.myhead);
+        TextView myId = (TextView) view.findViewById(R.id.show_accountid);
+        TextView myNick = (TextView) view.findViewById(R.id.show_nickname);
+        TextView myFgName = (TextView) view.findViewById(R.id.my_group_name);
+
+
+        SharedPreferences sp=getActivity().getSharedPreferences("login",MODE_PRIVATE);
+        myFgName.setText("我的家庭组：" + sp.getString("groupName",""));
+        String path = sp.getString("headImageUrl","null");
+        String projectName = ConfigUtils.getProperties(getActivity().getApplicationContext(), "project");
+        String url = ConfigUtils.getProperties(getActivity().getApplicationContext(), "host") + projectName;
+        url += path;
+
+        myhead.setImageUrl(url);
+        myId.setText("账户："+ sp.getString("username",""));
+        myNick.setText("昵称：" + sp.getString("nickName",""));
+
+        myConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AccountConfig.class);
+                startActivity(intent);
+            }
+        });
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +141,7 @@ public class MineFragment extends Fragment {
                 editor.putString("groupName","null");
                 editor.putString("creator","null");
                 editor.putString("nickName","null");
+                editor.putString("headImageUrl","url");
                 editor.commit();
                 Toast.makeText(getActivity(), "已注销，请重新登录", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getActivity(),Login.class);

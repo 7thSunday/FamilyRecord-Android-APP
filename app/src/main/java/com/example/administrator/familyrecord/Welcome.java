@@ -40,6 +40,7 @@ public class Welcome extends AppCompatActivity {
                 String groupName = null;
                 String creator = null;
                 String nickname = null;
+                String headImageUrl = null;
 
                 Toast.makeText(Welcome.this, "初始化中...", Toast.LENGTH_LONG).show();
 
@@ -59,6 +60,8 @@ public class Welcome extends AppCompatActivity {
                     myuseraccount = myuser.getString("account");
                     groupId = myuser.getString("groupId");
                     nickname = myuser.getString("nickName");
+                    groupName = myuser.getString("groupName");
+                    headImageUrl = myuser.getString("headImageUrl");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -69,6 +72,7 @@ public class Welcome extends AppCompatActivity {
                         editor.putString("groupName",groupName);
                         editor.putString("creator",creator);
                         editor.putString("nickName",nickname);
+                        editor.putString("headImageUrl",headImageUrl);
                         editor.commit();
                         handlerInFG.sendEmptyMessageDelayed(0,3000);
                     }else {

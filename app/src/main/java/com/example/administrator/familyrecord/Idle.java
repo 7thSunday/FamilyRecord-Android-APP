@@ -59,6 +59,7 @@ public class Idle extends AppCompatActivity {
                 editor.putString("groupName","null");
                 editor.putString("creator","null");
                 editor.putString("nickName","null");
+                editor.putString("headImageUrl","null");
                 editor.commit();
                 Toast.makeText(Idle.this, "已注销，请重新登录", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Idle.this,Login.class);

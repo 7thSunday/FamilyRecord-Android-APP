@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.administrator.familyrecord.fgManage.FgManage">
+    tools:context="com.example.administrator.familyrecord.myConfig.FgManage">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_add_member"

@@ -113,6 +113,18 @@ public class HttpUtils {
         return result;
     }
 
+    public static JSONObject update (String url, JSONObject user){
+        String msg = "";
+        JSONObject result = new JSONObject();
+        try {
+            msg =  Connecter(url,JsonToHttpString(user));
+            result = new JSONObject(msg);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static  JSONArray selectAlbum (String url, JSONObject user){
 
         JSONArray arr = null;
@@ -126,6 +138,19 @@ public class HttpUtils {
         }
 
         return arr;
+    }
+
+    public static JSONObject uploadHeadImage (String url,JSONObject user){
+        JSONObject result = new JSONObject();
+        try {
+            JSONObject receivedata = new JSONObject(Connecter(url,JsonToHttpString(user)));
+
+            result = new JSONObject(receivedata.getString("data"));//提取数据部分
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public static JSONObject createAlbum (String url,JSONObject newAlbum){

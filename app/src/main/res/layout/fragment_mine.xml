@@ -10,75 +10,89 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
-        <ImageView
+        <com.loopj.android.image.SmartImageView
             android:id="@+id/myhead"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_gravity="center"
             android:layout_margin="20dp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/show_accountid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:textColor="#ff99cc"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center" />
 
-            <TextView
-                android:id="@+id/show_accountid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
-
-            <TextView
-                android:id="@+id/show_nickname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
-
-            <TextView
-                android:id="@+id/show_birthday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_accountconfig"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="修改资料" />
-
-                <Button
-                    android:id="@+id/btn_fgmanage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="成员管理" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/show_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ff99cc"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_signout"
+                android:id="@+id/btn_reload_mine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="注销" />
+                android:background="#ff99cc"
+                android:textColor="#ffffff"
+                android:layout_margin="20dp"
+                android:text="刷新" />
+
+            <Button
+                android:id="@+id/btn_accountconfig"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="20dp"
+                android:textColor="#ffffff"
+                android:background="#ff99cc"
+                android:text="修改资料" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/my_group_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ff99cc"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btn_fgmanage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:textColor="#ffffff"
+            android:background="#ff99cc"
+            android:text="成员管理" />
+
+        <Button
+            android:id="@+id/btn_signout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:textColor="#ffffff"
+            android:background="#ff99cc"
+            android:text="注销" />
+
     </LinearLayout>
 </FrameLayout>
