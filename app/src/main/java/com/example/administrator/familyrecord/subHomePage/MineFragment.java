@@ -3,6 +3,7 @@ package com.example.administrator.familyrecord.subHomePage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -114,6 +115,14 @@ public class MineFragment extends Fragment {
         SharedPreferences sp=getActivity().getSharedPreferences("login",MODE_PRIVATE);
         myFgName.setText("我的家庭组：" + sp.getString("groupName",""));
         String path = sp.getString("headImageUrl","null");
+        String creator = sp.getString("creator","");
+        String user = sp.getString("username","null");
+
+        if (!creator.equals(user)){
+            manageFg.setEnabled(false);
+            manageFg.setBackgroundColor(Color.parseColor("#8a8a8a"));
+        }
+
         String projectName = ConfigUtils.getProperties(getActivity().getApplicationContext(), "project");
         String url = ConfigUtils.getProperties(getActivity().getApplicationContext(), "host") + projectName;
         url += path;

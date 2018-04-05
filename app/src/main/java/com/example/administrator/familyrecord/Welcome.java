@@ -62,6 +62,7 @@ public class Welcome extends AppCompatActivity {
                     nickname = myuser.getString("nickName");
                     groupName = myuser.getString("groupName");
                     headImageUrl = myuser.getString("headImageUrl");
+                    creator = myuser.getString("creator");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

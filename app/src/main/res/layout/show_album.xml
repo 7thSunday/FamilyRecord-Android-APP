@@ -7,6 +7,28 @@
     tools:context="com.example.administrator.familyrecord.album.ShowAlbum">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/photo_swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </ScrollView>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_upload_photo"
         android:layout_width="wrap_content"
@@ -18,7 +40,8 @@
         app:backgroundTint="@android:color/white"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="34dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_select_photo"
@@ -31,26 +54,15 @@
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btn_upload_photo"
-        app:srcCompat="@drawable/select" />
+        app:srcCompat="@drawable/select"
+        android:layout_marginStart="42dp" />
 
     <ImageView
         android:id="@+id/tempimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible" />
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/photo_swipe_refresh"
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_photo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+        android:visibility="invisible"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>
