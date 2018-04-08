@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.administrator.familyrecord.CreateFG;
 import com.example.administrator.familyrecord.R;
 import com.example.administrator.familyrecord.utils.ConfigUtils;
 import com.example.administrator.familyrecord.utils.HttpUtils;

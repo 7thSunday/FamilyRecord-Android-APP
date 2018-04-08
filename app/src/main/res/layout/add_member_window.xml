@@ -5,11 +5,11 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/window_tips"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:text="请输入账户" />
+        android:text="请输入账户"
+        android:textColor="#ffffff" />
 
     <EditText
         android:id="@+id/add_member_id"

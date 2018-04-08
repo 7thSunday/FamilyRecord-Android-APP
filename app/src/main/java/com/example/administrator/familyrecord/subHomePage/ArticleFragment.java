@@ -1,14 +1,37 @@
 package com.example.administrator.familyrecord.subHomePage;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.administrator.familyrecord.article.ArticleEditor;
 import com.example.administrator.familyrecord.R;
+import com.example.administrator.familyrecord.article.ShowArticle;
+import com.example.administrator.familyrecord.utils.ConfigUtils;
+import com.example.administrator.familyrecord.utils.HttpUtils;
+import com.example.administrator.familyrecord.utils.RecyclerViewUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -24,6 +47,15 @@ public class ArticleFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    public JSONObject object;
+    private RecyclerView recyclerView;
+    private Context context;
+    public ArrayList<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
+    public RecyclerViewAdapter mAdapter;
+    int pageNumber;
+//    private  String srcPath;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -67,6 +99,186 @@ public class ArticleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_article, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        pageNumber = 1;
+        init();
+        final SwipeRefreshLayout mRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.article_swipe_refresh);
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                init();
+                mRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        RecyclerViewUtil util = new RecyclerViewUtil(getActivity(),recyclerView);
+        util.setOnItemClickListener(new RecyclerViewUtil.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, View view) {
+                JSONObject article = new JSONObject();
+                try {
+                    article.put("title",list.get(position).get("title").toString());
+                    article.put("id",list.get(position).get("id").toString());
+                    article.put("rId",list.get(position).get("rId").toString());
+                    article.put("content",list.get(position).get("content").toString());
+                    article.put("creator",list.get( position).get("creator").toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(getActivity(), ShowArticle.class);
+                intent.putExtra("article",article.toString());
+                startActivity(intent);
+            }
+        });
+
+        FloatingActionButton write = (FloatingActionButton) getView().findViewById(R.id.btn_new_article);
+        write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ArticleEditor.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void init() {
+        list.clear();
+
+        context = getActivity().getApplicationContext();
+        recyclerView = (RecyclerView) getView().findViewById(R.id.recycler_view_article);
+        //使recyclerview保持固定的大小
+        recyclerView.setHasFixedSize(true);
+
+        //设置布局管理器，实现横向或数值滚动的列表布局
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        //ArrayList集合
+
+        Thread getArticle = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                SharedPreferences sp = getActivity().getSharedPreferences("login", MODE_PRIVATE);
+                String groupId = sp.getString("groupId", null);
+                JSONObject select = new JSONObject();
+                try {
+                    select.put("rId", groupId);
+                    select.put("pageSize",10);
+                    select.put("pageNum",pageNumber);
+//                    user.put("type","2");pageNumber,pageSize
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String selectArticleUrl = ConfigUtils.getProperties(getActivity().getApplicationContext(), "selectArticleUrl");
+                String url = ConfigUtils.getProperties(getActivity().getApplicationContext(), "host") + selectArticleUrl;
+                HttpUtils hu = new HttpUtils();
+                jsonJX(hu.selectArticle(url, select));
+
+
+            }
+
+            private void jsonJX(JSONArray data) {
+                //判断数据是空
+                if (data != null) {
+                    try {
+                        //遍历
+                        for (int i = 0; i < data.length(); i++) {
+                            object = data.getJSONObject(i);
+
+                            Map<String, Object> map = new HashMap<String, Object>();
+
+                            try {
+                                //获取到json数据中的内容
+                                String title = object.getString("title");
+                                String id = object.getString("id");
+                                String rId = object.getString("rId");
+                                String creator = object.getString("creator");
+                                String content = object.getString("content");
+                                String createTime = object.getString("createTime");
+                                //存入map
+                                map.put("title", title);
+                                map.put("content", content);
+                                map.put("id",id);
+                                map.put("rId",rId);
+                                map.put("creator",creator);
+                                map.put("createTime",createTime);
+
+                                //ArrayList集合
+                                list.add(map);
+
+                            } catch (JSONException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+
+                        }
+
+//                        Message message = new Message();
+//                        message.what = 1;
+//                        handler.sendMessage(message);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+        });
+        getArticle.start();
+        try {
+            getArticle.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        mAdapter = new RecyclerViewAdapter(list);
+        recyclerView.setAdapter(mAdapter);
+
+
+    }
+
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.myViewHolder>{
+
+        private ArrayList data;
+
+        public RecyclerViewAdapter(ArrayList<Map<String, Object>> list) {
+            this.data = list;
+        }
+
+        @Override
+        public myViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            myViewHolder holder=new myViewHolder(View.inflate(viewGroup.getContext(), R.layout.article_item, null));
+            return holder;
+        }
+        //绑定数据
+
+        @Override
+        public void  onBindViewHolder(myViewHolder holder, int i) {
+
+//            list.get(i).get("albumCover").toString();
+            holder.title.setText(list.get(i).get("title").toString());
+            holder.info .setText("作者："+list.get(i).get("creator")+" "+"发表时间："+list.get(i).get("createTime"));
+        }
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+        //ViewHolder类
+        public class myViewHolder extends RecyclerView.ViewHolder{
+            TextView title;
+            TextView info;
+            public myViewHolder(View itemView)
+            {
+                super(itemView);
+                title = (TextView)itemView.findViewById(R.id.article_title);
+                info = (TextView) itemView.findViewById(R.id.article_info);
+            }
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

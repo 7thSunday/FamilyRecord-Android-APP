@@ -1,4 +1,4 @@
-package com.example.administrator.familyrecord;
+package com.example.administrator.familyrecord.myConfig;
 
 import android.content.SharedPreferences;
 import android.os.Looper;
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.administrator.familyrecord.R;
 import com.example.administrator.familyrecord.utils.ConfigUtils;
 import com.example.administrator.familyrecord.utils.HttpUtils;
 

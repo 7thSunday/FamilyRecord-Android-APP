@@ -42,7 +42,7 @@ public class Welcome extends AppCompatActivity {
                 String nickname = null;
                 String headImageUrl = null;
 
-                Toast.makeText(Welcome.this, "初始化中...", Toast.LENGTH_LONG).show();
+                Toast.makeText(Welcome.this, "初始化中...", Toast.LENGTH_SHORT).show();
 
 
                 try {
@@ -75,14 +75,14 @@ public class Welcome extends AppCompatActivity {
                         editor.putString("nickName",nickname);
                         editor.putString("headImageUrl",headImageUrl);
                         editor.commit();
-                        handlerInFG.sendEmptyMessageDelayed(0,3000);
+                        handlerInFG.sendEmptyMessageDelayed(0,2000);
                     }else {
-                        handlerNotInFG.sendEmptyMessageDelayed(0,3000);
+                        handlerNotInFG.sendEmptyMessageDelayed(0,2000);
                     }
 
 
                 }else {
-                    handlerFailed.sendEmptyMessageDelayed(0,3000);
+                    handlerFailed.sendEmptyMessageDelayed(0,2000);
                 }
 
                 Looper.loop();

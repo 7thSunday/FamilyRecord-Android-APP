@@ -70,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#ff99cc"
+            android:layout_marginTop="30dp"
             android:textAlignment="center" />
 
         <Button
@@ -78,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:textColor="#ffffff"
             android:background="#ff99cc"
             android:text="成员管理" />
@@ -89,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:textColor="#ffffff"
             android:background="#ff99cc"
             android:text="注销" />

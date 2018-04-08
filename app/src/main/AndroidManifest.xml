@@ -25,10 +25,10 @@
         <activity android:name=".SignUp" />
         <activity android:name=".HomePage" />
         <activity android:name=".Idle" />
-        <activity android:name=".CreateFG" />
+        <activity android:name=".myConfig.CreateFG" />
         <activity android:name=".Login" />
         <activity
-            android:name=".ArticleEditor"
+            android:name=".article.ArticleEditor"
             android:label="@string/title_activity_article_editor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".album.ShowAlbum" />
@@ -42,7 +42,8 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".myConfig.AccountConfig"></activity>
+        <activity android:name=".myConfig.AccountConfig" />
+        <activity android:name=".article.ShowArticle"></activity>
     </application>
 
 </manifest>

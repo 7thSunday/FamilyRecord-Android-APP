@@ -177,6 +177,60 @@ public class HttpUtils {
         return arr;
     }
 
+    public static JSONArray selectArticle (String url,JSONObject select){
+        JSONArray arr = null;
+        JSONObject list = new JSONObject();
+        try {
+            JSONObject receivedata = new JSONObject(Connecter(url,JsonToHttpString(select)));
+            list = new JSONObject(receivedata.getString("data"));
+            arr = new JSONArray(list.getString("list"));//提取数据部分
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+//        System.out.println(arr);
+        return arr;
+    }
+
+    public static JSONArray selectComment (String url,JSONObject select){
+        JSONArray arr = null;
+        JSONObject list = new JSONObject();
+        try {
+            JSONObject receivedata = new JSONObject(Connecter(url,JsonToHttpString(select)));
+            list = new JSONObject(receivedata.getString("data"));
+            arr = new JSONArray(list.getString("list"));//提取数据部分
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+//        System.out.println(arr);
+        return arr;
+    }
+
+    public static JSONObject replyArticle (String url ,JSONObject reply){
+        String msg = "";
+        JSONObject result = new JSONObject();
+        try {
+            msg =  Connecter(url,JsonToHttpString(reply));
+            result = new JSONObject(msg);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static JSONObject createArticle (String url ,JSONObject article){
+        String msg = "";
+        JSONObject result = new JSONObject();
+        try {
+            msg =  Connecter(url,JsonToHttpString(article));
+            result = new JSONObject(msg);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static JSONArray selectMember (String url, JSONObject family){
         JSONArray arr = null;
         try {
