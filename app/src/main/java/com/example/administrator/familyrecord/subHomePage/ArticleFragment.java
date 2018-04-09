@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.administrator.familyrecord.article.ArticleEditor;
 import com.example.administrator.familyrecord.R;
+import com.example.administrator.familyrecord.article.ShowMessage;
 import com.example.administrator.familyrecord.article.ShowArticle;
 import com.example.administrator.familyrecord.utils.ConfigUtils;
 import com.example.administrator.familyrecord.utils.HttpUtils;
@@ -140,6 +141,14 @@ public class ArticleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ArticleEditor.class);
+                startActivity(intent);
+            }
+        });
+        FloatingActionButton message = (FloatingActionButton) getView().findViewById(R.id.btn_message);
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ShowMessage.class);
                 startActivity(intent);
             }
         });

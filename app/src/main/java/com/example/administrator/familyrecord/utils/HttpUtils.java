@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-
-
 public class HttpUtils {
 
     public static String Connecter (String url ,String outputdata){
@@ -229,6 +227,20 @@ public class HttpUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static JSONArray getMessage (String url,JSONObject user){
+        JSONArray arr = null;
+        try {
+            JSONObject receivedata = new JSONObject(Connecter(url,JsonToHttpString(user)));
+
+            arr = new JSONArray(receivedata.getString("data"));//提取数据部分
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return arr;
     }
 
     public static JSONArray selectMember (String url, JSONObject family){

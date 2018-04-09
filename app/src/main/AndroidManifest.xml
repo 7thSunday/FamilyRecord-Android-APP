@@ -43,7 +43,8 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".myConfig.AccountConfig" />
-        <activity android:name=".article.ShowArticle"></activity>
+        <activity android:name=".article.ShowArticle" />
+        <activity android:name=".article.ShowMessage"></activity>
     </application>
 
 </manifest>
