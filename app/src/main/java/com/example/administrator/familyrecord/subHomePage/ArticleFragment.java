@@ -22,6 +22,7 @@ import com.example.administrator.familyrecord.article.ShowMessage;
 import com.example.administrator.familyrecord.article.ShowArticle;
 import com.example.administrator.familyrecord.utils.ConfigUtils;
 import com.example.administrator.familyrecord.utils.HttpUtils;
+import com.example.administrator.familyrecord.utils.Marquee;
 import com.example.administrator.familyrecord.utils.RecyclerViewUtil;
 
 import org.json.JSONArray;
@@ -55,6 +56,7 @@ public class ArticleFragment extends Fragment {
     public ArrayList<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
     public RecyclerViewAdapter mAdapter;
     int pageNumber;
+    JSONArray arr;
 //    private  String srcPath;
 
 
@@ -152,6 +154,50 @@ public class ArticleFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        getNotification();
+
+    }
+
+    private void getNotification(){
+
+        final SharedPreferences sp=getActivity().getSharedPreferences("login",MODE_PRIVATE);
+//        final SharedPreferences.Editor editor =sp.edit();
+        final String groupId = sp.getString("groupId","");
+        final JSONObject news = new JSONObject();
+        try {
+            news.put("topNum",0);
+            news.put("groupId",groupId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+         Thread getNews = new Thread(new Runnable() {
+             @Override
+             public void run() {
+                 HttpUtils hu = new HttpUtils();
+                 String getHomePageInfoUrl = ConfigUtils.getProperties(getActivity().getApplicationContext(), "getHomePageInfoUrl");
+                 String url = ConfigUtils.getProperties(getActivity().getApplicationContext(),"host") + getHomePageInfoUrl;
+                 arr = hu.getNews(url,news);
+             }
+        });
+        getNews.start();
+        try {
+            getNews.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < arr.length(); i++) {
+            try {
+                JSONObject result = (JSONObject) arr.get(i);
+                TextView show = (TextView) getView().findViewById(R.id.birthday_notification);
+                String content = show.getText().toString();
+                content += result.getString("nickName").toString() + "的生日" + result.getString("birthday").toString() + "快到了哦~";
+                if (i+1<arr.length()) content += "\n";
+                show.setText(content);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void init() {

@@ -281,6 +281,20 @@ public class HttpUtils {
         return result;
     }
 
+    public static JSONArray getNews (String url , JSONObject user){
+        JSONArray result = null;
+        try {
+            JSONObject receivedata = new JSONObject(Connecter(url,JsonToHttpString(user)));
+
+            JSONObject arr = new JSONObject(receivedata.getString("data"));//提取数据部分
+            result = new JSONArray(arr.getString("birthdayRemindingList"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static void upload (String url,String srcPath, JSONObject user){
         final File file=new File(srcPath);
         final String TAG = "uploadFile";

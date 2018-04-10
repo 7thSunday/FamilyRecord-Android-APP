@@ -12,31 +12,26 @@ import android.widget.TextView;
 
 import com.example.administrator.familyrecord.subHomePage.ArticleFragment;
 import com.example.administrator.familyrecord.subHomePage.MineFragment;
-import com.example.administrator.familyrecord.subHomePage.NewsFragment;
 import com.example.administrator.familyrecord.subHomePage.PhotoFragment;
 import com.example.administrator.familyrecord.subHomePage.VideoFragment;
 
 public class HomePage extends AppCompatActivity implements View.OnClickListener{
 
-    private NewsFragment newsFragment;
     private ArticleFragment articleFragment;
     private PhotoFragment photoFragment;
     private VideoFragment videoFragment;
     private MineFragment mineFragment;
 
-    private View newsLayout;
     private View articleLayout;
     private View photoLayout;
     private View videoLayout;
     private View mineLayout;
 
-    private ImageView newsIcon;
     private ImageView articleIcon;
     private ImageView photoIcon;
     private ImageView videoIcon;
     private ImageView mineIcon;
 
-    private TextView newsText;
     private TextView articleText;
     private TextView photoText;
     private TextView videoText;
@@ -55,25 +50,21 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void initViews(){
-        newsLayout = findViewById(R.id.news_layout);
         articleLayout = findViewById(R.id.article_layout);
         photoLayout = findViewById(R.id.photo_layout);
         videoLayout = findViewById(R.id.video_layout);
         mineLayout = findViewById(R.id.mine_layout);
 
-        newsIcon = (ImageView) findViewById(R.id.news_icon);
         articleIcon = (ImageView) findViewById(R.id.article_icon);
         photoIcon = (ImageView) findViewById(R.id.photo_icon);
         videoIcon = (ImageView) findViewById(R.id.video_icon);
         mineIcon = (ImageView) findViewById(R.id.mine_icon);
 
-        newsText = (TextView) findViewById(R.id.news_text);
         articleText = (TextView) findViewById(R.id.article_text);
         photoText = (TextView) findViewById(R.id.photo_text);
         videoText = (TextView) findViewById(R.id.video_text);
         mineText = (TextView) findViewById(R.id.mine_text);
 
-        newsLayout.setOnClickListener(this);
         articleLayout.setOnClickListener(this);
         photoLayout.setOnClickListener(this);
         videoLayout.setOnClickListener(this);
@@ -84,25 +75,21 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.news_layout:
-                // 当点击了动态tab时，选中第1个tab
+            case R.id.article_layout:
+                // 当点击了帖子tab时，选中第1个tab
                 setTabSelection(0);
                 break;
-            case R.id.article_layout:
-                // 当点击了帖子tab时，选中第2个tab
+            case R.id.photo_layout:
+                // 当点击了相册tab时，选中第2个tab
                 setTabSelection(1);
                 break;
-            case R.id.photo_layout:
-                // 当点击了相册tab时，选中第3个tab
+            case R.id.video_layout:
+                // 当点击了视频tab时，选中第3个tab
                 setTabSelection(2);
                 break;
-            case R.id.video_layout:
-                // 当点击了视频tab时，选中第4个tab
-                setTabSelection(3);
-                break;
             case R.id.mine_layout:
-                // 当点击了我的tab时，选中第5个tab
-                setTabSelection(4);
+                // 当点击了我的tab时，选中第4个tab
+                setTabSelection(3);
                 break;
             default:
                 break;
@@ -118,19 +105,6 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
         hideFragments(transaction);
         switch (index) {
             case 0:
-                // 当点击了动态tab时，改变控件的图片和文字颜色
-                newsIcon.setImageResource(R.drawable.news_selected);
-                newsText.setTextColor(Color.parseColor("#ff99cc"));
-                if (newsFragment == null) {
-                    // 如果newsFragment为空，则创建一个并添加到界面上
-                    newsFragment = new NewsFragment();
-                    transaction.add(R.id.content, newsFragment);
-                } else {
-                    // 如果newsFragment不为空，则直接将它显示出来
-                    transaction.show(newsFragment);
-                }
-                break;
-            case 1:
                 // 当点击了帖子tab时，改变控件的图片和文字颜色
                 articleIcon.setImageResource(R.drawable.article_selected);
                 articleText.setTextColor(Color.parseColor("#ff99cc"));
@@ -143,7 +117,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
                     transaction.show(articleFragment);
                 }
                 break;
-            case 2:
+            case 1:
                 // 当点击了相册tab时，改变控件的图片和文字颜色
                 photoIcon.setImageResource(R.drawable.photo_selected);
                 photoText.setTextColor(Color.parseColor("#ff99cc"));
@@ -156,7 +130,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
                     transaction.show(photoFragment);
                 }
                 break;
-            case 3:
+            case 2:
                 // 当点击了视频tab时，改变控件的图片和文字颜色
                 videoIcon.setImageResource(R.drawable.video_selected);
                 videoText.setTextColor(Color.parseColor("#ff99cc"));
@@ -169,7 +143,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
                     transaction.show(videoFragment);
                 }
                 break;
-            case 4:
+            case 3:
                 // 当点击了我的tab时，改变控件的图片和文字颜色
                 mineIcon.setImageResource(R.drawable.mine_selected);
                 mineText.setTextColor(Color.parseColor("#ff99cc"));
@@ -189,8 +163,6 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void clearSelection(){
-        newsIcon.setImageResource(R.drawable.news);
-        newsText.setTextColor(Color.parseColor("#8a8a8a"));
         articleIcon.setImageResource(R.drawable.article);
         articleText.setTextColor(Color.parseColor("#8a8a8a"));
         photoIcon.setImageResource(R.drawable.photo);
@@ -202,9 +174,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void hideFragments(FragmentTransaction transaction){
-        if (newsFragment != null){
-            transaction.hide(newsFragment);
-        }
+
         if (articleFragment !=  null){
             transaction.hide(articleFragment);
         }
